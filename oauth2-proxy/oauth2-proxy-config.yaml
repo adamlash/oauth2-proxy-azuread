@@ -1,0 +1,19 @@
+config:
+  existingSecret: oauth2-proxy-creds
+
+extraArgs:
+  whitelist-domain: .test.qill.in
+  cookie-domain: .test.qill.in
+  provider: azure
+
+ingress:
+  enabled: true
+  path: /
+  hosts:
+    - auth.test.qill.in
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  tls:
+    - secretName: oauth2-proxy-https-cert
+      hosts:
+        - auth.test.qill.in
