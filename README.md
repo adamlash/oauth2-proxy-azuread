@@ -1,9 +1,9 @@
 # oauth2-proxy-azuread
 Oauth2 Proxy on K8s with a Demo App and on Azure. The below will assume a FRESH cluster has been made, but you can also do this on an existing one, just add or remove where applicable (eg ingress controller). 
 
-This is also for the nginx ingress contoller so if you are using something else (Traefik etc.). 
+This is also for the nginx ingress contoller so if you are using something else (Traefik etc.), check out how to do the redirection from authed/not authed.
 
-The Final point is the below is using the **dummy builtin self-signed K8s Certs as well**, you may want to look at using something like cert-manager (https://cert-manager.io/docs/installation/kubernetes/) for actually creating *real* certificates with letsencrypt! This is just a quick demo mainly focussing on the oauth2-proxy config, and all the cert stuff is just incidental...
+The final point is the below is using the **dummy builtin self-signed K8s Certs as well**, you may want to look at using something like cert-manager (https://cert-manager.io/docs/installation/kubernetes/) for actually creating *real* certificates with letsencrypt! This is just a quick demo mainly focussing on the oauth2-proxy config, and all the cert stuff is just incidental...
 
 
 ## Step 0 - Get a Domain
@@ -78,7 +78,7 @@ oauth2-proxy wants the azure-tenant, client-id, client-secret and cookie-secret.
 - azure-tenant = Directory (Tenant) ID
 - client-id = App (Client) ID
 - client-secret = Secret Key
-- cookie-secret = can be generated with (python3) `python -c 'import os,base64; print(base64.b64encode(os.urandom(16)))'`
+- cookie-secret = can be generated with python `python -c 'import os,base64; print(base64.b64encode(os.urandom(16)))'`
 
 Populate where applicable + Run the following command to create a K8s Secret. The proxy will use these:
 ```
