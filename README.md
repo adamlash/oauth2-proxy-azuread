@@ -119,3 +119,38 @@ kubectl apply -f ingress/echo_auth_ingress.yaml
 If you are also already authenticated to AAD, you may be asked to just approve this login and pushed straight through.
 
 *Please one again denote the certs are the dummy K8s ones, so cert error are expected for this demo!*
+
+
+## Further Reading
+- The interesting files to check out here are ingress/echo_auth_ingress.yaml and oauth-proxy/oauth2-proxy-config.yaml
+
+### oauth2-proxy-config.yaml
+The Secret Created Above:
+```
+config:
+  existingSecret: oauth2-proxy-creds
+```
+- This is where we are retrieving the secrets we punched in from the App Registration.
+
+
+The extraArgs for the Helm Chart:
+```
+extraArgs:
+  whitelist-domain: .test.qill.in
+  cookie-domain: .test.qill.in
+  provider: azure
+```
+- This is specifying we are using the Azure Provider (builtin to oauth2-proxy) as well as what domains to allow redirect on (in our case anything in the `.test.qill.in` zone)
+
+
+For more info and options, check out the helm chart doco at: https://github.com/helm/charts/tree/master/stable/oauth2-proxy
+
+### echo_auth_ingress.yaml
+These two annotations:
+```
+    nginx.ingress.kubernetes.io/auth-url: "https://auth.test.qill.in/oauth2/auth"
+    nginx.ingress.kubernetes.io/auth-signin: "https://auth.test.qill.in/oauth2/start?rd=https%3A%2F%2F$host$request_uri"
+```
+- We are telling users coming into this ingress host echo1 to authorize at this url (which not incidentally, is our oauth2-proxy ingress host)
+
+For more info on these annotations, check out: https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/annotations.md#external-authentication
