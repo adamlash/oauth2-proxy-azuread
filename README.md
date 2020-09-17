@@ -114,7 +114,6 @@ kubectl apply -f ingress/echo_auth_ingress.yaml
 2. You will be redirected to auth.test.qill.in and and from there, auth will be checked
 3. If no auth, the oauth2-proxy will redirect you into AAD login, and ask you to login/authenticate
 4. One Authed, it will then redirect you back to your original site, in this case echo1.test.qill.in
-5. All future sessions will be authed accordingly
 
 If you are also already authenticated to AAD, you may be asked to just approve this login and pushed straight through.
 
@@ -122,7 +121,7 @@ If you are also already authenticated to AAD, you may be asked to just approve t
 
 
 ## Further Reading
-- The interesting files to check out here are ingress/echo_auth_ingress.yaml and oauth-proxy/oauth2-proxy-config.yaml
+The interesting files to check out here are `ingress/echo_auth_ingress.yaml` and `oauth-proxy/oauth2-proxy-config.yaml`
 
 ### oauth2-proxy-config.yaml
 The Secret Created Above:
