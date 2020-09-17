@@ -23,7 +23,7 @@ Creating the Registration in AAD
 ### 1. Create App Registration in Azure Active Directory:
 - Browse to Azure Active Directory > App Registrations
 - Create New Registration
-- Configure with Name, Scope and Redirect URI of https://auth.test.qill.in/oauth2/callback (denote the URL here is the **Auth Proxy** with the callback prepended.)
+- Configure with Name, Scope and Redirect URI of https://auth.test.qill.in/oauth2/callback (denote the URL here is the **Auth Proxy** with the callback appended.)
 
 ### 2. Retrieve Information for App
 - Browse to Certificates and Secrets > Add 'New Client Secret'
