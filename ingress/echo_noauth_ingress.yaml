@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: echo-ingress
@@ -8,11 +8,16 @@ spec:
   tls:
   - hosts:
     - echo1.test.qill.in
+    
     secretName: echo-tls
   rules:
   - host: echo1.test.qill.in
     http:
       paths:
-      - backend:
-          serviceName: echo1
-          servicePort: 80
+      - path: /
+        pathType: Prefix
+        backend:
+            service: 
+              name: echo1
+              port: 
+                number: 80
